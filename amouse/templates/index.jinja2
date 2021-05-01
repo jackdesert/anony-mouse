@@ -1,0 +1,13 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="content">
+    <h1>Anon Convo Starter</h1>
+    <input type='button' v-on:click='compose' >I would like to speak</input>
+
+    <div class='compose-window' v-if='composeVisible'>
+        <span class='prompt'>It would be great if</span>
+        <textarea ></textarea>
+    </div>
+</div>
+{% endblock content %}
