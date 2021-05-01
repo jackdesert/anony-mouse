@@ -1,0 +1,43 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="content">
+    <h1>Anony-Mouse</h1>
+    <div class='hide-on-load'>
+
+        <div v-if='showAvailable()'>
+            <button type='button' v-on:click='reserve'>I would like to speak</button>
+        </div>
+
+        <div v-if='showReserved()'>
+            <div>
+                Someone else is composing. Please try again soon.
+            </div>
+        </div>
+
+
+        <div id='compose-window' v-if='showReservedByYou()'>
+            <h2>Theme</h2>
+            <select v-model='selectedTheme' >
+                <option v-for="(theme, key) in themes" :value="key" :key="key">
+                    ${ theme }
+                </option>
+            </select>
+            <br>
+            <textarea v-model='message' placeholder='your thoughts'></textarea>
+
+
+            <div>
+                <button type='button' v-on:click='publish' >Send</button>
+                <button type='button' v-on:click='stopCompose' >Cancel</button>
+            </div>
+        </div>
+
+        <div v-if='showWaiting()'>
+            <div>
+                Waiting. Perhaps there is something you could say as yourself.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
