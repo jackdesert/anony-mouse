@@ -151,6 +151,10 @@ body {
   background: #5b5;
 }
 
+.footer {
+  margin-top: 2rem;
+}
+
 @media (max-width: 1199px) {
   .content h1 {
     font-size: 45px;

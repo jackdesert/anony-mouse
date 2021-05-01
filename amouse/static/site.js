@@ -6,6 +6,11 @@ var page = new Vue(
             compose: function(event) {
                 this.composeVisible = true
             },
+            stopCompose: function(event) {
+                this.composeVisible = false
+            },
+            send: function(event) {
+            }
         }
 
     }
