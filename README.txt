@@ -28,3 +28,10 @@ Getting Started
 - Run your project.
 
     env/bin/pserve development.ini
+
+Backlog
+-------
+
+- Make list of environment variables:
+  - slack_hook
+  - slack_channel
