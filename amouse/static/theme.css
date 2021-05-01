@@ -1,111 +1,164 @@
-@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+
+	Eric Meyer					:: http://meyerweb.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+
+-------------------------------------------------------------------------------*/
+
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font-weight: normal;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+main, article, aside, figure, footer, header, nav, section, details, summary {display: block;}
+
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+
+/* Responsive images and other embedded objects */
+/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */
+img,
+object,
+embed {max-width: 100%;}
+
+/*
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
+	In fact, it *will* cause problems with Google Maps' controls at small size.
+	If this is the case for you, try uncommenting the following:
+
+#map img {
+		max-width: none;
+}
+*/
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+/* we use a lot of ULs that aren't bulleted.
+	you'll have to restore the bullets within content,
+	which is fine because they're probably customized anyway */
+ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* tables still need cellspacing="0" in the markup */
+table {border-collapse: separate; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle;}
+
+pre {
+    white-space: pre; /* CSS2 */
+    white-space: pre-wrap; /* CSS 2.1 */
+    white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+    word-wrap: break-word; /* IE */
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom;}
+.ie7 input[type="checkbox"] {vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+
+small {font-size: 85%;}
+
+strong {font-weight: bold;}
+
+td, td img {vertical-align: top;}
+
+/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+input[type=file],
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button,
+input[type=button] {width: auto; overflow: visible;}
+
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover
+   (commented out as usage is rare, and the filter syntax messes with some pre-processors)
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+*/
+
+/* let's clear some floats */
+.clearfix:after { content: " "; display: block; clear: both; }
+
+
+/* Custom Styles */
+
+
+
 body {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
   color: #ffffff;
-  background: #bc2131;
+  background: #5b5;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-weight: 300;
-}
-p {
-  font-weight: 300;
-}
-button, input, optgroup, select, textarea {
-  color: black;
-}
-.font-normal {
-  font-weight: 400;
-}
-.font-semi-bold {
-  font-weight: 600;
-}
-.font-bold {
-  font-weight: 700;
-}
-.starter-template {
-  margin-top: 250px;
-}
-.starter-template .content {
-  margin-left: 10px;
-}
-.starter-template .content h1 {
-  margin-top: 10px;
-  font-size: 60px;
-}
-.starter-template .content h1 .smaller {
-  font-size: 40px;
-  color: #f2b7bd;
-}
-.starter-template .content .lead {
-  font-size: 25px;
-  color: #f2b7bd;
-}
-.starter-template .content .lead .font-normal {
-  color: #ffffff;
-}
-.starter-template .links {
-  float: right;
-  right: 0;
-  margin-top: 125px;
-}
-.starter-template .links ul {
-  display: block;
-  padding: 0;
-  margin: 0;
-}
-.starter-template .links ul li {
-  list-style: none;
-  display: inline;
-  margin: 0 10px;
-}
-.starter-template .links ul li:first-child {
-  margin-left: 0;
-}
-.starter-template .links ul li:last-child {
-  margin-right: 0;
-}
-.starter-template .links ul li.current-version {
-  color: #f2b7bd;
-  font-weight: 400;
-}
-.starter-template .links ul li a, a {
-  color: #f2b7bd;
-  text-decoration: underline;
-}
-.starter-template .links ul li a:hover, a:hover {
-  color: #ffffff;
-  text-decoration: underline;
-}
-.starter-template .links ul li .icon-muted {
-  color: #eb8b95;
-  margin-right: 5px;
-}
-.starter-template .links ul li:hover .icon-muted {
-  color: #ffffff;
-}
-.starter-template .copyright {
-  margin-top: 10px;
-  font-size: 0.9em;
-  color: #f2b7bd;
-  text-transform: lowercase;
-  float: right;
-  right: 0;
-}
+
 @media (max-width: 1199px) {
-  .starter-template .content h1 {
+  .content h1 {
     font-size: 45px;
   }
-  .starter-template .content h1 .smaller {
+  .content h1 .smaller {
     font-size: 30px;
   }
-  .starter-template .content .lead {
+  .content .lead {
     font-size: 20px;
   }
 }
@@ -116,39 +169,35 @@ button, input, optgroup, select, textarea {
   .starter-template .logo {
     margin: 40px auto;
   }
-  .starter-template .content {
+  .content {
     margin-left: 0;
     text-align: center;
   }
-  .starter-template .content h1 {
+  .content h1 {
     margin-bottom: 20px;
   }
-  .starter-template .links {
+  .links {
     float: none;
     text-align: center;
     margin-top: 60px;
   }
-  .starter-template .copyright {
-    float: none;
-    text-align: center;
-  }
 }
 @media (max-width: 767px) {
-  .starter-template .content h1 .smaller {
+  .content h1 .smaller {
     font-size: 25px;
     display: block;
   }
-  .starter-template .content .lead {
+  .content .lead {
     font-size: 16px;
   }
-  .starter-template .links {
+  .links {
     margin-top: 40px;
   }
-  .starter-template .links ul li {
+  .links ul li {
     display: block;
     margin: 0;
   }
-  .starter-template .links ul li .icon-muted {
+  .links ul li .icon-muted {
     display: none;
   }
   .starter-template .copyright {
