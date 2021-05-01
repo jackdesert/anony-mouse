@@ -7,12 +7,14 @@
         <button type='button' v-on:click='compose'>I would like to speak</button>
     </div>
 
-    <div id='compose-window' v-if='composeVisible'>
-        <div class='prompt'>It would be great if</div>
-        <textarea ></textarea>
-        <div>
-            <button type='button' v-on:click='send' >Send</button>
-            <button type='button' v-on:click='stopCompose' >Cancel</button>
+    <div class='hide-on-load'>
+        <div id='compose-window' v-if='composeVisible'>
+            <div class='prompt'>It would be great if</div>
+            <textarea v-model='message'></textarea>
+            <div>
+                <button type='button' v-on:click='sendMessage' >Send</button>
+                <button type='button' v-on:click='stopCompose' >Cancel</button>
+            </div>
         </div>
     </div>
 </div>
