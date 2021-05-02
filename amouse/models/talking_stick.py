@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from uuid import uuid4
 
+
 class TalkingStick:
 
     RESERVE_WINDOW_IN_SECONDS = 60
@@ -13,7 +14,6 @@ class TalkingStick:
     RESERVED = 1
     # You can assume that RESERVED_BY_YOU is 2
     REGENERATING = 3
-
 
     _state = AVAILABLE
     _token = None
@@ -35,10 +35,11 @@ class TalkingStick:
             cls._token = str(uuid4())
             cls._timestamp = datetime.now()
             return dict(
-                    # calling cls.state() so pseudostate is available
-                    state=cls.state(cls._token),
-                    token=cls._token,
-                    seconds_remaining=cls.RESERVE_WINDOW_IN_SECONDS)
+                # calling cls.state() so pseudostate is available
+                state=cls.state(cls._token),
+                token=cls._token,
+                seconds_remaining=cls.RESERVE_WINDOW_IN_SECONDS,
+            )
         return dict(state=cls._state)
 
     @classmethod
@@ -81,7 +82,6 @@ class TalkingStick:
         seconds = time_remaining.total_seconds()
         return seconds
 
-
     @classmethod
     def is_token_valid(cls, token):
         if cls._state != cls.RESERVED:
@@ -92,7 +92,6 @@ class TalkingStick:
         if seconds < 0:
             return False, 'token expired'
         return True, seconds
-
 
     @classmethod
     def state(cls, token=''):
@@ -120,8 +119,3 @@ class TalkingStick:
         """
         state, seconds_remaining = cls.state(token)
         return dict(state=state, seconds_remaining=seconds_remaining)
-
-
-
-
-

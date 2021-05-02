@@ -10,6 +10,7 @@ LOCK = RLock()
 Any interactions with TalkingStick are expected to be wrapped in LOCK
 """
 
+
 @view_config(route_name='home', renderer='amouse:templates/index.jinja2')
 def home_view(request):
     with LOCK:
@@ -17,12 +18,14 @@ def home_view(request):
         print(res)
         return res
 
+
 @view_config(route_name='reserve', renderer='json')
 def reserve_view(request):
     with LOCK:
         reservation = TalkingStick.reserve()
         print(reservation)
         return reservation
+
 
 @view_config(route_name='publish', renderer='json')
 def publish_view(request):
@@ -41,4 +44,3 @@ def state_view(request):
     with LOCK:
         res = dict(state=TalkingStick.state(token))
         return res
-
