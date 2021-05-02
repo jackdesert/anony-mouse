@@ -34,13 +34,8 @@ class TalkingStick:
             cls._state = cls.RESERVED
             cls._token = str(uuid4())
             cls._timestamp = datetime.now()
-            return dict(
-                # calling cls.state() so pseudostate is available
-                state=cls.state(cls._token),
-                token=cls._token,
-                seconds_remaining=cls.RESERVE_WINDOW_IN_SECONDS,
-            )
-        return dict(state=cls._state)
+            return cls.state_dict(cls._token)
+        return cls.state_dict()
 
     @classmethod
     def publish(cls, message, token):
@@ -49,7 +44,7 @@ class TalkingStick:
         if valid_or_not:
             print(f'Publishing {message}')
             cls.reset()
-        return valid_or_not, reason
+        return cls.state_dict()
 
     @classmethod
     def _token_seconds_remaining(cls):
@@ -77,6 +72,8 @@ class TalkingStick:
         """
         Returns a positive or negative number
         """
+        if cls._timestamp is None:
+            return -1000
         now = datetime.now()
         time_remaining = timedelta(seconds=original_seconds) - (now - cls._timestamp)
         seconds = time_remaining.total_seconds()
@@ -94,28 +91,33 @@ class TalkingStick:
         return True, seconds
 
     @classmethod
-    def state(cls, token=''):
+    def state_tuple(cls, token=''):
         """
         Returns a tuple containing:
             A. The state
-            B. Seconds remaining
+            B. Seconds remaining (or None)
+            C. Token (or None)
+
+
         """
         valid_or_not, token_seconds_remaining = cls.is_token_valid(token)
         if (cls._state == cls.RESERVED) and valid_or_not:
             # Return a pseudostate
-            return cls._state + 1, token_seconds_remaining
+            return cls._state + 1, token_seconds_remaining, token
         regen_seconds = cls._regenerate_seconds_remaining()
         if (cls._state == cls.REGENERATING) and (regen_seconds < 0):
             # Change state to AVAILABLE because waited long enough
             cls._state = cls.AVAILABLE
         if cls._state == cls.REGENERATING:
-            return cls._state, regen_seconds
-        return cls._state, None
+            return cls._state, regen_seconds, None
+        return cls._state, None, None
 
     @classmethod
     def state_dict(cls, token=''):
         """
         Returns state and seconds remaining
         """
-        state, seconds_remaining = cls.state(token)
-        return dict(state=state, seconds_remaining=seconds_remaining)
+        state, seconds_remaining, returned_token = cls.state_tuple(token)
+        return dict(
+            state=state, seconds_remaining=seconds_remaining, token=returned_token
+        )

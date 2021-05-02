@@ -14,9 +14,9 @@ Any interactions with TalkingStick are expected to be wrapped in LOCK
 @view_config(route_name='home', renderer='amouse:templates/index.jinja2')
 def home_view(request):
     with LOCK:
-        res = dict(state=TalkingStick.state())
-        print(res)
-        return res
+        state_dict = TalkingStick.state_dict()
+        print(state_dict)
+        return state_dict
 
 
 @view_config(route_name='reserve', renderer='json')
@@ -32,15 +32,14 @@ def publish_view(request):
     message = request.json.get('message')
     token = request.json.get('token')
     with LOCK:
-        success, reason = TalkingStick.publish(message, token)
-        res = dict(success=success, reason=reason)
-        print(res)
-        return res
+        state_dict = TalkingStick.publish(message, token)
+        print(state_dict)
+        return state_dict
 
 
 @view_config(route_name='state', renderer='json')
 def state_view(request):
     token = request.json.get('token')
     with LOCK:
-        res = dict(state=TalkingStick.state(token))
-        return res
+        state_dict = TalkingStick.state_dict(token)
+        return state_dict
