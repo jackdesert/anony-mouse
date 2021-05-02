@@ -29,6 +29,12 @@ Getting Started
 
     env/bin/pserve development.ini
 
+
+jshint
+------
+
+    jshint amouse/static/site.js
+
 Backlog
 -------
 

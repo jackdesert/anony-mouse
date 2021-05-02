@@ -3,6 +3,8 @@ const RESERVED = 1
 const RESERVED_BY_YOU = 2
 const WAITING = 3
 
+const POLL_PERIOD_MS = 10000
+
 var page = new Vue(
     {
         el: '#container',
@@ -12,18 +14,23 @@ var page = new Vue(
                token: null},
         methods: {
             showAvailable: function(event){
+                'use strict'
                 return this.state === AVAILABLE
             },
             showReserved: function(event){
+                'use strict'
                 return this.state === RESERVED
             },
             showReservedByYou: function(event){
+                'use strict'
                 return this.state === RESERVED_BY_YOU
             },
             showWaiting: function(event){
+                'use strict'
                 return this.state === WAITING
             },
             reserve: function(event) {
+                'use strict'
                 // See http://youmightnotneedjquery.com
 
                 const request = new XMLHttpRequest()
@@ -68,9 +75,11 @@ var page = new Vue(
                 request.send()
             },
             stopCompose: function(event) {
+                'use strict'
                 alert('need method for cancel reservation')
             },
             publish: function(event) {
+                'use strict'
                 // See http://youmightnotneedjquery.com
 
                 const request = new XMLHttpRequest()
@@ -103,6 +112,10 @@ var page = new Vue(
 
             },
             poll: function(event) {
+                'use strict'
+                // Poll periodically
+                setTimeout(this.poll, POLL_PERIOD_MS)
+
                 // See http://youmightnotneedjquery.com
 
                 const request = new XMLHttpRequest()
@@ -146,6 +159,7 @@ var page = new Vue(
 
 // Show things that were hidded during load
 document.querySelectorAll('.hide-on-load').forEach(function(item, index, array){
+    'use strict'
     item.classList.remove('hide-on-load')
 })
 
